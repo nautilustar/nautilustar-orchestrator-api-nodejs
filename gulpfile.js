@@ -27,8 +27,12 @@ gulp.task('naut-create', function () {
         gulp
             .src(element.template)
             .pipe(gulpReplace('NameFileReplace',args.file))
-            .pipe(gulpReplace('NameReplace',args.object))
+            .pipe(gulpReplace('NameReplace',capitalizeFirstLetter(args.file)))
             .pipe(gulpRename(args.file + preffix))
             .pipe(gulp.dest(element.dest));
     }, this);
 });
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
