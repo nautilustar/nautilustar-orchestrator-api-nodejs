@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const replace = require('gulp-replace');
+const gulpReplace = require('gulp-replace');
 const gulpCopy = require('gulp-copy');
 const gulpConcat = require('gulp-concat');
 const gulpRename = require("gulp-rename");
@@ -20,12 +20,15 @@ const settings = [
         dest: 'application/routes/'
     }
 ];
+const preffix = '.js';
 
 gulp.task('naut-create', function () {
     settings.forEach(function (element) {
         gulp
             .src(element.template)
-            .pipe(gulpRename(args.file))
+            .pipe(gulpReplace('NameFileReplace',args.file))
+            .pipe(gulpReplace('NameReplace',args.object))
+            .pipe(gulpRename(args.file + preffix))
             .pipe(gulp.dest(element.dest));
     }, this);
 });
