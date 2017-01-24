@@ -3,34 +3,46 @@ const gulpReplace = require('gulp-replace');
 const gulpCopy = require('gulp-copy');
 const gulpConcat = require('gulp-concat');
 const gulpRename = require("gulp-rename");
+const gulpInject = require('gulp-inject-string');
+
 const args = require('yargs').argv;
 const through = require('through2');
 
-const settings = [
-    {
-        template: 'templates/repository_template.tpt',
-        dest: 'application/repository/'
-    },
-    {
-        template: 'templates/business_template.tpt',
-        dest: 'application/business/'
-    },
-    {
-        template: 'templates/route_template.tpt',
-        dest: 'application/routes/'
-    }
-];
-const preffix = '.js';
+const settings = 
+{
+    preffix: '.js',
+    files: [
+                {
+                    template: 'templates/repository_template.tpt',
+                    dest: 'application/repository/'
+                },
+                {
+                    template: 'templates/business_template.tpt',
+                    dest: 'application/business/'
+                },
+                {
+                    template: 'templates/route_template.tpt',
+                    dest: 'application/routes/'
+                }
+            ]
+}
 
 gulp.task('naut-create', function () {
-    settings.forEach(function (element) {
+    settings.files.forEach(function (element) {
         gulp
             .src(element.template)
-            .pipe(gulpReplace('NameFileReplace',args.file))
-            .pipe(gulpReplace('NameReplace',capitalizeFirstLetter(args.file)))
-            .pipe(gulpRename(args.file + preffix))
+            .pipe(gulpReplace('NameFileReplace', args.file))
+            .pipe(gulpReplace('NameReplace', args.file))
+            .pipe(gulpRename(args.file + settings.preffix))
             .pipe(gulp.dest(element.dest));
     }, this);
+
+    gulp
+        .src('configurations/routes.js')
+        .pipe(gulpInject.after('/**naut-file-import**/','\nimports'))
+        .pipe(gulpInject.after('/**naut-instance-object**/','\ninstances'))
+        .pipe(gulpInject.after('/**naut-routes**/','\nroutes'))
+        .pipe(gulp.dest('configurations/'));
 });
 
 function capitalizeFirstLetter(string) {

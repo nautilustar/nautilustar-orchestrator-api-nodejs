@@ -1,0 +1,5 @@
+router.post('/EndPointReplace', NameObjectReplace.save.bind(NameObjectReplace));
+router.put('/EndPointReplace/:id', NameObjectReplace.update.bind(NameObjectReplace));
+router.delete('/EndPointReplace/:id', NameObjectReplace.removeById.bind(NameObjectReplace));
+router.get('/EndPointReplace', NameObjectReplace.findAll.bind(NameObjectReplace));
+router.get('/EndPointReplace/:id', NameObjectReplace.findById.bind(NameObjectReplace));
