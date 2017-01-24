@@ -1,0 +1,12 @@
+'use strict';
+
+var BaseRepository = require('./base_repository');
+var NameReplaceModel = require('../model/NameFileReplace');
+
+class NameReplaceRepository extends BaseRepository {
+    constructor() {
+        super(NameReplaceModel);
+    }
+}
+
+module.exports = NameReplaceRepository;

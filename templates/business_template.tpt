@@ -1,0 +1,12 @@
+'use strict';  
+
+const BaseBusiness = require('./base_business'); 
+const NameReplaceRepository = require('../repository/NameFileReplace');
+
+class NameReplaceBusiness extends BaseBusiness {
+    constructor() {
+        super(new NameReplaceRepository());
+    }
+}
+
+module.exports = NameReplaceBusiness;

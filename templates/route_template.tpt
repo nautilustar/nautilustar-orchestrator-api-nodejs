@@ -1,0 +1,12 @@
+'use strict';
+
+const BaseRoute = require('./base_route');
+const NameReplaceBusiness = require('../business/NameFileReplace');
+
+class NameReplaceRoute extends BaseRoute {
+    constructor() {
+        super(new NameReplaceBusiness());
+    }
+}
+
+module.exports = NameReplaceRoute;
