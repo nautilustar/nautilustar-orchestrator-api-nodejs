@@ -16,10 +16,19 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.2.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-copy": "^1.0.0",
+    "gulp-file": "^0.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
     "lodash": "^4.17.4",
     "mocha": "^3.0.2",
     "nautilustar-debug": "^0.1.0",
     "should": "^11.1.0",
-    "supertest": "^2.0.0"
+    "supertest": "^2.0.0",
+    "through2": "^2.0.3",
+    "yargs": "^6.6.0"
   }
 }
