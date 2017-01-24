@@ -2,7 +2,13 @@
 Project with Orchestrator API - Auto Generator Crud
 
 How to use
-`gulp naut-create --file client`
+`gulp naut-create --file client --route clients`
+
+Parameters 
+
+--file: file name 
+
+--route: route name
 
 Installation
 `npm install -g gulp-cli`
