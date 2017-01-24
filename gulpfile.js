@@ -34,9 +34,10 @@ const settings =
         return '\n\tvar ' + file + ' = new ' + objectName + '();';
     },
     templateRoutes: function(routeName, object){
-        var routeFindAll = 'router.get(\'/'+routeName+'\', '+object+'.findAll.bind('+object+'));\'';
+        var divisor = '\n\n//' + routeName;
+        var routeFindAll = '\nrouter.get(\'/'+routeName+'\', '+object+'.findAll.bind('+object+'));';
 
-        return routeFindAll;
+        return divisor + routeFindAll;
     }
 }
 
