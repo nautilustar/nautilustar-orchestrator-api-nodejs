@@ -1,5 +1,5 @@
 # nautilus-orchestrator-api-nodejs
-Project with Orchestrator API - Auto Generator Crud
+Project with Orchestrator API - Auto Generator Crud in ECMA6
 
 How to use
 `gulp naut-create --file client --route clients`
