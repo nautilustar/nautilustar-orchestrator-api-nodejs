@@ -30,16 +30,20 @@ const settings =
                 }
     ],
     templateImport: function(file){
-        var objectName = capitalizeFirstLetter(file);
-        return '\n\tconst ' + objectName + ' = require(\'application/routes/' + file + '\');';
+        var objectName = file.capitalizeFirstLetter();
+        return '{0}const {1} = require(\'application/routes/{2}\');'.format('\n\t', objectName, file);
     },
     templateInstance: function(file){
-        var objectName = capitalizeFirstLetter(file);
-        return '\n\tvar ' + file + ' = new ' + objectName + '();';
+        var objectName = file.capitalizeFirstLetter();
+        return '{0}var {1} = new {2}();'.format('\n\t', file, objectName);
     },
     templateRoutes: function(routeName, object){
-        var divisor = '\n\n\t\t//' + routeName;
-        var routeFindAll = '\n\t\trouter.get(\'/'+routeName+'\', '+object+'.findAll.bind('+object+'));';
+        //comment
+        var divisor = '{0}//{1}'.format('\n\n\t\t', routeName);
+
+        //routes
+        var tabSpace = '\n\t\t';
+        var routeFindAll = '{0}router.get(\'/{1}\'.findAll.bind({2}));'.format(tabSpace, routeName, object);
 
         return divisor + routeFindAll;
     }
@@ -50,7 +54,7 @@ gulp.task('naut-create', function () {
         gulp
             .src(element.template)
             .pipe(gulpReplace('NameFileReplace', args.file))
-            .pipe(gulpReplace('NameReplace', capitalizeFirstLetter(args.file)))
+            .pipe(gulpReplace('NameReplace', args.file.capitalizeFirstLetter()))
             .pipe(gulpRename(args.file + settings.preffix))
             .pipe(gulp.dest(element.dest));
     }, this);
@@ -63,6 +67,18 @@ gulp.task('naut-create', function () {
         .pipe(gulp.dest('configurations/'));
 });
 
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+String.prototype.capitalizeFirstLetter = function() { 
+    var formatted = this;
+    return formatted.charAt(0).toUpperCase() + formatted.slice(1);
+}
+
+String.prototype.format = function(){
+    var formatted = this;
+    
+    for(var i = 0; i < arguments.length;i++){
+        var regex = new RegExp('\\{'+i+'}','gi');
+        formatted = formatted.replace(regex,arguments[i]);
+    }
+
+    return formatted;
 }
