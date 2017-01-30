@@ -31,15 +31,15 @@ const settings =
     ],
     templateImport: function(file){
         var objectName = capitalizeFirstLetter(file);
-        return '\n\t\tconst' + objectName + ' = require(\'application/routes/' + file + '\');';
+        return '\n\tconst ' + objectName + ' = require(\'application/routes/' + file + '\');';
     },
     templateInstance: function(file){
         var objectName = capitalizeFirstLetter(file);
         return '\n\tvar ' + file + ' = new ' + objectName + '();';
     },
     templateRoutes: function(routeName, object){
-        var divisor = '\n\n//' + routeName;
-        var routeFindAll = '\nrouter.get(\'/'+routeName+'\', '+object+'.findAll.bind('+object+'));';
+        var divisor = '\n\n\t\t//' + routeName;
+        var routeFindAll = '\n\t\trouter.get(\'/'+routeName+'\', '+object+'.findAll.bind('+object+'));';
 
         return divisor + routeFindAll;
     }

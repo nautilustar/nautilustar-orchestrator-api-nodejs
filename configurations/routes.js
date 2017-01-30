@@ -1,9 +1,11 @@
 function ConfigRouter() {
+    
     const
         Express = require('express'),
         Filters = require('./filters')();
-        /**naut-file-import**/
 
+    /**naut-file-import**/
+    
     /**naut-instance-object**/
 
     function Router() {
