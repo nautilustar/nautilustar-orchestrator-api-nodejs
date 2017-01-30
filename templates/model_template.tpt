@@ -1,0 +1,11 @@
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
+
+/**
+ * NameReplace Schema 
+ */
+var NameReplaceSchema = new Schema({
+    
+});
+
+module.exports = mongoose.model('NameReplace', NameReplaceSchema);  

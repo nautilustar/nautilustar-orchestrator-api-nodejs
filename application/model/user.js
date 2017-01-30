@@ -2,13 +2,6 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 /**
- * A Validation function for local strategy properties
- */
-var validateLocalStrategyProperty = function (property) {
-    return ((this.provider !== 'local' && !this.updated) || property.length);
-};
-
-/**
  * User Schema 
  */
 var UserSchema = new Schema({
