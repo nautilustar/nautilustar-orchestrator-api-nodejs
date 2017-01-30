@@ -23,6 +23,10 @@ const settings =
                 {
                     template: 'templates/route_template.tpt',
                     dest: 'application/routes/'
+                },
+                {
+                    template: 'templates/model_template.tpt',
+                    dest: 'application/model/'
                 }
     ],
     templateImport: function(file){
@@ -55,7 +59,7 @@ gulp.task('naut-create', function () {
         .src('configurations/routes.js')
         .pipe(gulpInject.after('/**naut-file-import**/', settings.templateImport(args.file)))
         .pipe(gulpInject.after('/**naut-instance-object**/', settings.templateInstance(args.file)))
-        .pipe(gulpInject.after('/**naut-routes**/',settings.templateRoutes(args.route, args.file)))
+        .pipe(gulpInject.after('/**naut-routes**/', settings.templateRoutes(args.route, args.file)))
         .pipe(gulp.dest('configurations/'));
 });
 
