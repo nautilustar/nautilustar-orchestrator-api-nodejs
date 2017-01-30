@@ -31,7 +31,7 @@ const settings =
     ],
     templateImport: function(file){
         var objectName = capitalizeFirstLetter(file);
-        return '\n\t\t' + objectName + ' = require(\'application/routes/' + file + '\')';
+        return '\n\t\tconst' + objectName + ' = require(\'application/routes/' + file + '\');';
     },
     templateInstance: function(file){
         var objectName = capitalizeFirstLetter(file);

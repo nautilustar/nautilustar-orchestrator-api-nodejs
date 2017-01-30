@@ -1,8 +1,8 @@
 function ConfigRouter() {
     const
         Express = require('express'),
-        Filters = require('./filters')(),
-        /**naut-file-import**/;
+        Filters = require('./filters')();
+        /**naut-file-import**/
 
     /**naut-instance-object**/
 
