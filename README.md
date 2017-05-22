@@ -1,12 +1,12 @@
 # nautilus-orchestrator-api-nodejs
 Project with Orchestrator API - Auto Generator Crud RESTFul in ECMA6
 
-####How to use
+#### How to use
 
 *Clone the project *
 https://github.com/nautilustar/nautilustar-orchestrator-api-nodejs.git
 
-##Installation##
+## Installation
 
 **Install gulp**
 `npm install -g gulp-cli`
@@ -14,7 +14,7 @@ https://github.com/nautilustar/nautilustar-orchestrator-api-nodejs.git
 **Install packages**
 `npm install`
 
-##Settings##
+## Settings
 
 **Create route for 'users' **
 `gulp naut-create --file user --route users`
@@ -26,6 +26,7 @@ https://github.com/nautilustar/nautilustar-orchestrator-api-nodejs.git
     --route: route name
 
 **Last step - Setting your entity**
+
 Access the file {project}/application/model/user.js
 And put your fields
 
@@ -71,16 +72,24 @@ Mongoose guide http://mongoosejs.com/docs/guide.html
 - - -/repository
 - - -/routes
 - - -/util
+
 /**configurations**
 - - -database.js
 - - -filters.js
 - - -database.js
 - - -interceptors.js
 - - -routes.js
+
 /**node-modules**
+
 /**templates**
+
 /**tests**
+
 index.js
+
 gulpfile.js
+
 package.json
+
 enviroment.env
