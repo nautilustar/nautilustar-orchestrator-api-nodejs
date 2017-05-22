@@ -27,7 +27,7 @@ https://github.com/nautilustar/nautilustar-orchestrator-api-nodejs.git
 
 **Last step - Setting your entity**
 
-Access the file {project}/application/model/user.js
+Access the file `{project}/application/model/user.js`
 And put your fields
 
 Mongoose guide http://mongoosejs.com/docs/guide.html   
