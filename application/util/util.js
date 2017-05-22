@@ -2,7 +2,8 @@
 var
     mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    Lodash = require('lodash');
+    Lodash = require('lodash'),
+    Moment = require('moment');
 
 var Util = {};
 
@@ -10,6 +11,8 @@ var Util = {};
  * Mongoose
  */
 Util.mongoose = mongoose;
+
+Util.moment = Moment;
 
 /**
  * Convert string to objectId
@@ -76,7 +79,17 @@ Util.objectToArray = function (obj, key) {
         function (index) {
             return obj[index][key];
         }
-        );
+    );
+
+    return arr;
+}
+
+Util.objectToArray = function (obj) {
+    var arr = Object.keys(obj).map(
+        function (index) {
+            return obj[index];
+        }
+    );
 
     return arr;
 }
@@ -157,19 +170,30 @@ Util.inArrayString = function (value, array) {
     return false;
 }
 
+Util.verifyKeysInObject = function (arrayKeys, object) {
+    var countKeys = 0;
+    var totalKeys = arrayKeys.length;
+
+    arrayKeys.forEach(function (element) {
+        if (object.hasOwnProperty(element)) countKeys++;
+    }, this);
+
+    return countKeys == totalKeys;
+}
+
 Util.replaceAll = function (str, find, replace) {
     return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
 };
 
-Util.isFunction = function(test){
+Util.isFunction = function (test) {
     return (typeof test === 'function');
 }
 
-Util.removeDuplicates = function(a, param){
-        return a.filter(function(item, pos, array){
-            return array.map(function(mapItem){ return mapItem[param]; }).indexOf(item[param]) === pos;
-        })
-    }
+Util.removeDuplicates = function (a, param) {
+    return a.filter(function (item, pos, array) {
+        return array.map(function (mapItem) { return mapItem[param]; }).indexOf(item[param]) === pos;
+    })
+}
 
 Util.time = function () {
 
@@ -195,10 +219,53 @@ Util.time = function () {
     return year + ":" + month + ":" + day + ":" + hour + ":" + min + ":" + sec;
 }
 
+function daysBetween(date1, date2) {
+
+    // The number of milliseconds in one day
+    var ONE_DAY = 1000 * 60 * 60 * 24
+
+    // Convert both dates to milliseconds
+    var date1_ms = date1.getTime()
+    var date2_ms = date2.getTime()
+
+    // Calculate the difference in milliseconds
+    var difference_ms = Math.abs(date1_ms - date2_ms)
+
+    // Convert back to days and return
+    return Math.round(difference_ms / ONE_DAY)
+
+}
+
 Util.rawurlencode = function (str) {
     str = (str + '').toString();
     return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
         replace(/\)/g, '%29').replace(/\*/g, '%2A');
+}
+
+Util.dateNew = function (date) {
+    var day = date.getDate();
+    var month = date.getMonth();
+    var year = date.getFullYear();
+
+    return new Date(year, month, day);
+}
+
+Util.noGmt = function (date) {
+    return new Date(date.valueOf() + date.getTimezoneOffset() * 60000);
+}
+
+Util.createDateAsUTC = function (date) {
+    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
+}
+
+Util.convertDateToUTC = function (date) {
+    return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+}
+
+//format expire date (remove time hh:ss)
+Util.removeHour = function (data) {
+    var result = new Date(data);
+    return new Date(result.getFullYear(), result.getMonth(), result.getDate());
 }
 
 module.exports = Util;

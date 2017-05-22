@@ -27,7 +27,7 @@ class BaseRoute {
     }
 
     update(req, res, next) {
-        this._business.save(req.body, res);
+        this._business.update(req,req.body, res);
     }
 
     removeById(req, res, next) {

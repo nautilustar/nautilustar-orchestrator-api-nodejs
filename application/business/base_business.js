@@ -1,5 +1,13 @@
 'use strict';
 
+const errors = {
+    internalError: {
+        'error': '500 Internal Error',
+        'error_description': 'Erro interno',
+        'error_uri': ['Houve um problema com o servidor. Entre em contato com o administrador do sistema.']
+    }
+}
+
 class BaseBusiness {
 
     /**
@@ -38,7 +46,8 @@ class BaseBusiness {
                     res.json(data);
                 })
                 .catch(function (err) {
-                    res.json(err);
+                    console.log(err);
+                    res.status(500).json(errors.internalError);
                 });
         }
     }
@@ -72,7 +81,8 @@ class BaseBusiness {
                     res.json(data);
                 })
                 .catch(function (err) {
-                    res.json(err);
+                    console.log(err);
+                    res.status(500).json(errors.internalError);
                 });
         }
     }
@@ -85,14 +95,15 @@ class BaseBusiness {
      */
     findOneByQuery(query, res) {
         if (!res) {
-            return this._repository.findOne(query);
+            return this._repository.findOneByQuery(query);
         } else {
-            return this._repository.findOne(query)
+            return this._repository.findOneByQuery(query)
                 .then(function (data) {
                     res.json(data);
                 })
                 .catch(function (err) {
-                    res.json(err);
+                    console.log(err);
+                    res.status(500).json(errors.internalError);
                 });
         }
     }
@@ -122,7 +133,8 @@ class BaseBusiness {
                     res.json(data);
                 })
                 .catch(function (err) {
-                    res.json(err);
+                    console.log(err);
+                    res.status(500).json(errors.internalError);
                 });
         }
     }
@@ -144,7 +156,8 @@ class BaseBusiness {
                     res.json(data);
                 })
                 .catch(function (err) {
-                    res.json(err);
+                    console.log(err);
+                    res.status(500).json(errors.internalError);
                 });
         }
     }
@@ -173,7 +186,8 @@ class BaseBusiness {
                     res.json(data);
                 })
                 .catch(function (err) {
-                    res.json(err);
+                    console.log(err);
+                    res.status(500).json(errors.internalError);
                 });
         }
     }
@@ -204,7 +218,8 @@ class BaseBusiness {
                     res.json(data);
                 })
                 .catch(function (err) {
-                    res.json(err);
+                    console.log(err);
+                    res.status(500).json(errors.internalError);
                 });
         }
     }
@@ -216,15 +231,16 @@ class BaseBusiness {
      * @return promise
      */
     save(object, res) {
-        if (typeof res === undefined) {
+        if (!res) {
             return this._repository.save(object);
         } else {
             return this._repository.save(object)
                 .then(function (data) {
-                    res.json(data);
+                    res.status(201).json(data);
                 })
                 .catch(function (err) {
-                    res.json(err);
+                    console.log(err);
+                    res.status(500).json(errors.internalError);
                 });
         }
     }

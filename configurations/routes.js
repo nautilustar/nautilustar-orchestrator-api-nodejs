@@ -1,27 +1,40 @@
 function ConfigRouter() {
-    
-    const
-        Express = require('express'),
-        Filters = require('./filters')();
+	var multer = require('multer');
 
-    /**naut-file-import**/
-    
-    /**naut-instance-object**/
+	const Express = require('express');
 
-    function Router() {
-        return this.init(Express.Router());
-    }
+	/**naut-file-import**/
+	const UserFilter = require('../application/filters/user');
 
-    Router.prototype.init = function (router) {
+	const User = require('../application/routes/user');
 
-        /**naut-routes**/
+	/**naut-instance-object**/
 
-        return router;
-    }
+	var userFilter = new UserFilter(false);
+	var user = new User();
 
-    return {
-        routes: new Router()
-    }
+	function Router() {
+		return this.init(Express.Router());
+	}
+
+	Router.prototype.init = function (router) {
+		
+		/**naut-routes**/
+
+		//users
+		router.post('/users', userFilter.validateInsert.bind(userFilter), user.save.bind(user));
+		router.put('/users/:id', userFilter.validateUpdate.bind(userFilter), user.update.bind(user));
+		router.delete('/users/:id', user.removeById.bind(user));
+		router.get('/users', user.findAll.bind(user));
+		router.get('/users/:id', user.findById.bind(user));
+		router.delete('/users', user.removeAll.bind(user));
+
+		return router;
+	}
+
+	return {
+		routes: new Router()
+	}
 }
 
 module.exports = ConfigRouter;

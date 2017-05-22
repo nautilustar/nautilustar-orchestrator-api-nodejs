@@ -5,6 +5,10 @@ const
     env = require('node-env-file'),
     server = express();
 
+//filters
+const Cors = require('./application/interceptors/cors');
+var interceptorCors = new Cors();
+
 env(__dirname + '/enviroment.env', { verbose: false, overwrite: false, raise: false, logger: console });
 process.env.PORT = process.env.NODE_PORT || process.env.PORT;
 
@@ -15,7 +19,7 @@ const
 
 var
     interceptors = require('./configurations/interceptors')(),
-    routes = require('./configurations/routes')().routes;
+    routes = require('./configurations/routes')(server.oauth).routes;
 
 //configurations
 server.config = (function () {
@@ -23,7 +27,7 @@ server.config = (function () {
     server.enable('trust proxy');
     server.use(bodyParser.urlencoded({ extended: true }));
     server.use(bodyParser.json());
-    server.use(interceptors.cors.apply);
+    server.use(interceptorCors.apply());
     server.use('/v1', routes);
     db.connect();
 })();
@@ -34,9 +38,9 @@ server.listen(port, ip, function (err) {
 });
 
 exports.listen = function () {
-  this.server.listen.apply(this.server, arguments);
+    this.server.listen.apply(this.server, arguments);
 };
 
 exports.close = function (callback) {
-  this.server.close(callback);
+    this.server.close(callback);
 };
