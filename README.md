@@ -1,5 +1,5 @@
 # nautilus-orchestrator-api-nodejs
-Project with Orchestrator API - Auto Generator Crud RESTFul in ECMA6
+Project with Orchestrator API - ECMA6 - Auto Generator Crud RESTFul
 
 ## How to use
 
