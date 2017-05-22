@@ -63,7 +63,7 @@ Mongoose guide http://mongoosejs.com/docs/guide.html
     });
     module.exports = mongoose.model('User', UserSchema);  
 
-### Estructure
+### Structure
 /**application**
 - - -/business
 - - -/filters
