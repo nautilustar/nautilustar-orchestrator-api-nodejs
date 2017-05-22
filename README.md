@@ -3,29 +3,29 @@ Project with Orchestrator API - Auto Generator Crud RESTFul in ECMA6
 
 #### How to use
 
-*Clone the project *
+* Clone the project *
 https://github.com/nautilustar/nautilustar-orchestrator-api-nodejs.git
 
 ## Installation
 
-**Install gulp**
+** Install gulp **
 `npm install -g gulp-cli`
 
-**Install packages**
+** Install packages **
 `npm install`
 
 ## Settings
 
-**Create route for 'users' **
+** Create route for 'users' **
 `gulp naut-create --file user --route users`
 
-**Parameters **
+** Parameters **
 
     --file: file name 
     
     --route: route name
 
-**Last step - Setting your entity**
+** Last step - Setting your entity **
 
 Access the file {project}/application/model/user.js
 And put your fields
