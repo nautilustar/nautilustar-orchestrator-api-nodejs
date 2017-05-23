@@ -63,6 +63,49 @@ Mongoose guide http://mongoosejs.com/docs/guide.html
     });
     module.exports = mongoose.model('User', UserSchema);  
 
+## API Requests
+
+//FIND ALL
+
+    GET /v1/users
+    Host: localhost:3000
+    Cache-Control: no-cache
+
+//FIND BY ID
+
+    GET /v1/users/{ID}
+    Host: localhost:3000
+    Cache-Control: no-cache
+
+//SAVE
+
+    POST /v1/users
+    Host: localhost:3000
+    Content-Type: application/json
+    Cache-Control: no-cache
+    {
+    	"user_name":"NautilusStar",
+    	"password":"1234",
+    	"email":"email@email.com"
+    }
+
+//UPDATE
+
+    PUT /v1/users/{ID}
+    Host: localhost:3000
+    Content-Type: application/json
+    {
+    	"user_name":"StarNautilus",
+    	"password":"4321",
+    	"email":"email@email.com"
+    }
+
+//DELETE
+
+    DELETE /v1/users/{ID}
+    Host: localhost:3000
+    Cache-Control: no-cache
+
 ### Structure
 /**application**
 - - -/business
